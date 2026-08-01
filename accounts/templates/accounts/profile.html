@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+
+<h1>User Profile</h1>
+
+<p><strong>Username:</strong> {{ request.user.username }}</p>
+
+<p><strong>Email:</strong> {{ request.user.email }}</p>
+
+<p><strong>Role:</strong> {{ profile.role }}</p>
+
+<p><strong>Phone:</strong> {{ profile.phone }}</p>
+
+<p><strong>Address:</strong> {{ profile.address }}</p>
+
+<hr>
+
+{% if profile.role == "JOB_SEEKER" %}
+
+    <h2>Job Seeker Information</h2>
+
+    <p><strong>Skills:</strong> {{ jobseeker.skills }}</p>
+
+    <p><strong>Education:</strong> {{ jobseeker.education }}</p>
+
+    <p><strong>Experience:</strong> {{ jobseeker.experience }}</p>
+
+{% endif %}
+
+{% if profile.role == "RECRUITER" %}
+
+    <h2>Recruiter Information</h2>
+
+    <p><strong>Designation:</strong> {{ recruiter.designation }}</p>
+
+    <p><strong>Department:</strong> {{ recruiter.department }}</p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'logout' %}">Logout</a>
+
+<br><br>
+
+<a href="{% url 'edit_profile' %}">
+    
+</a>
+
+</body>
+</html>

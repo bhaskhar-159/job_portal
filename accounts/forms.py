@@ -1,23 +1,25 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, JobSeekerProfile, RecruiterProfile
 
 class UserRegistrationForm(forms.ModelForm):
-    class Meta:
-
-        model = User
-
-        fields = [
-            "username",
-            "email",
-            "password"
-        
-        ]
+    
     role = forms.ChoiceField(
-    choices=UserProfile.ROLE_CHOICES
+        choices=UserProfile.ROLE_CHOICES
+    )    
+    
+    phone = forms.CharField()
+    
+    class Meta:
+        model = User
+        fields = ["username", "email", "password"]
+        
+    password = forms.CharField(
+        widget=forms.PasswordInput()    
+        
 )
 
-phone = forms.CharField()    
+    
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -34,3 +36,23 @@ class LoginForm(forms.Form):
             "placeholder": "Enter Password"
         })
     )
+    
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ["phone", "address", "profile_image"]    
+        
+        
+class JobSeekerProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = JobSeekerProfile
+        fields = ["resume", "skills", "education", "experience", "github", "linkedin", "portfolio"] 
+        
+
+class RecruiterProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = RecruiterProfile
+        fields = ["designation", "department"]               

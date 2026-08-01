@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm
-from .models import UserProfile
+from .models import UserProfile, JobSeekerProfile, RecruiterProfile
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
@@ -27,12 +27,25 @@ def register(request):
             user.save()
             
             # Create UserProfile
-            UserProfile.objects.create(
+            profile = UserProfile.objects.create(
                 user=user,
                 role=form.cleaned_data["role"],
                 phone=form.cleaned_data["phone"],
             )
             
+            # Create role-specific profile
+            if profile.role == "JOB_SEEKER":
+
+                JobSeekerProfile.objects.create(
+                    user_profile=profile
+                )
+
+            elif profile.role == "RECRUITER":
+
+                RecruiterProfile.objects.create(
+                    user_profile=profile
+                )
+                
             # Redirect to login page
             return redirect("login")
     else:
@@ -114,6 +127,29 @@ def jobseeker_dashboard(request):
     )            
             
     
-   
+@login_required(login_url="login")
+def profile(request):
+
+    profile = request.user.profile
+
+    context = {
+        "profile": profile
+    }
+
+    if profile.role == "JOB_SEEKER":
+        context["jobseeker"] = profile.jobseeker
+
+    elif profile.role == "RECRUITER":
+        context["recruiter"] = profile.recruiter
+
+    return render(
+        request,
+        "accounts/profile.html",
+        context
+    )
+    
+@login_required(login_url="login")
+def edit_profile(request):
+    pass    
     
     

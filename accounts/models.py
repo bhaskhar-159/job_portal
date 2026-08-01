@@ -25,15 +25,65 @@ class UserProfile(models.Model):
         blank=True
     )
 
+    address = models.TextField(blank=True)
+
     profile_image = models.ImageField(
         upload_to="profile_images/",
         blank=True,
         null=True
     )
 
-    address = models.TextField(blank=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.user.username
+
+
+class JobSeekerProfile(models.Model):
+
+    user_profile = models.OneToOneField(
+        UserProfile,
+        on_delete=models.CASCADE,
+        related_name="jobseeker"
+    )
+
+    resume = models.FileField(
+        upload_to="resumes/",
+        blank=True,
+        null=True
+    )
+
+    skills = models.TextField(blank=True)
+
+    education = models.TextField(blank=True)
+
+    experience = models.TextField(blank=True)
+
+    github = models.URLField(blank=True)
+
+    linkedin = models.URLField(blank=True)
+
+    portfolio = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.user_profile.user.username
+
+
+class RecruiterProfile(models.Model):
+
+    user_profile = models.OneToOneField(
+        UserProfile,
+        on_delete=models.CASCADE,
+        related_name="recruiter"
+    )
+
+    designation = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    department = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    def __str__(self):
+        return self.user_profile.user.username
