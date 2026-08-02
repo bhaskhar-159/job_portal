@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from .forms import (UserRegistrationForm, LoginForm, UserProfileForm, JobSeekerProfileForm, RecruiterProfileForm,)
 
 def register(request):
     
@@ -152,4 +153,98 @@ def profile(request):
 def edit_profile(request):
     pass    
     
-    
+
+
+@login_required(login_url="login")
+def edit_profile(request):
+
+    profile = request.user.profile
+
+    # -----------------------------
+    # JOB SEEKER
+    # -----------------------------
+    if profile.role == "JOB_SEEKER":
+
+        jobseeker = profile.jobseeker
+
+        if request.method == "POST":
+
+            profile_form = UserProfileForm(
+                request.POST,
+                request.FILES,
+                instance=profile
+            )
+
+            jobseeker_form = JobSeekerProfileForm(
+                request.POST,
+                request.FILES,
+                instance=jobseeker
+            )
+
+            if profile_form.is_valid() and jobseeker_form.is_valid():
+
+                profile_form.save()
+                jobseeker_form.save()
+
+                return redirect("profile")
+
+        else:
+
+            profile_form = UserProfileForm(instance=profile)
+
+            jobseeker_form = JobSeekerProfileForm(instance=jobseeker)
+
+        context = {
+            "profile_form": profile_form,
+            "role_form": jobseeker_form,
+        }
+
+        return render(
+            request,
+            "accounts/edit_profile.html",
+            context
+        )
+
+    # -----------------------------
+    # RECRUITER
+    # -----------------------------
+    recruiter = profile.recruiter
+
+    if request.method == "POST":
+
+        profile_form = UserProfileForm(
+            request.POST,
+            request.FILES,
+            instance=profile
+        )
+
+        recruiter_form = RecruiterProfileForm(
+            request.POST,
+            instance=recruiter
+        )
+
+        if profile_form.is_valid() and recruiter_form.is_valid():
+
+            profile_form.save()
+            recruiter_form.save()
+
+            return redirect("profile")
+
+    else:
+
+        profile_form = UserProfileForm(instance=profile)
+
+        recruiter_form = RecruiterProfileForm(instance=recruiter)
+
+    context = {
+
+        "profile_form": profile_form,
+
+        "role_form": recruiter_form,
+    }
+
+    return render(
+        request,
+        "accounts/edit_profile.html",
+        context
+    )    
