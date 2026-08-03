@@ -5,6 +5,7 @@ from .forms import JobForm
 from companies.models import Company
 from django.shortcuts import get_object_or_404
 from .models import Job
+from django.db.models import Q
 
 
 @login_required(login_url="login")
@@ -190,3 +191,80 @@ def delete_job(request, job_id):
         }
     )      
     
+    
+    
+@login_required(login_url="login")
+def browse_jobs(request):
+
+    profile = request.user.profile
+
+    if profile.role != "JOB_SEEKER":
+        return HttpResponseForbidden(
+            "Access Denied"
+        )
+
+    search = request.GET.get("search")
+
+    jobs = Job.objects.filter(
+        is_active=True
+    ).select_related("company")
+
+    if search:
+
+        jobs = jobs.filter(
+
+            Q(title__icontains=search) |
+            Q(company__name__icontains=search) |
+            Q(location__icontains=search)
+
+        )
+
+    context = {
+
+        "jobs": jobs,
+        "search": search
+
+    }
+
+    return render(
+        request,
+        "jobs/browse_jobs.html",
+        context
+    )    
+    
+    
+
+@login_required(login_url="login")
+def jobseeker_job_detail(request, job_id):
+
+    profile = request.user.profile
+
+    if profile.role != "JOB_SEEKER":
+
+        return HttpResponseForbidden(
+            "Access Denied"
+        )
+
+    job = get_object_or_404(
+
+        Job,
+
+        id=job_id,
+
+        is_active=True
+
+    )
+
+    return render(
+
+        request,
+
+        "jobs/jobseeker_job_detail.html",
+
+        {
+
+            "job": job
+
+        }
+
+    )    

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Browse Jobs</title>
+
+</head>
+
+<body>
+
+<h1>Browse Jobs</h1>
+
+<form method="GET">
+
+<input
+type="text"
+name="search"
+placeholder="Search jobs..."
+value="{{ search }}">
+
+<button type="submit">
+
+Search
+
+</button>
+
+</form>
+
+<hr>
+
+{% for job in jobs %}
+
+<h2>
+
+<a href="{% url 'jobseeker_job_detail' job.id %}">
+
+{{ job.title }}
+
+</a>
+
+</h2>
+
+<p>
+
+Company :
+
+{{ job.company.name }}
+
+</p>
+
+<p>
+
+Location :
+
+{{ job.location }}
+
+</p>
+
+<p>
+
+Experience :
+
+{{ job.get_experience_display }}
+
+</p>
+
+<p>
+
+Type :
+
+{{ job.get_job_type_display }}
+
+</p>
+
+<hr>
+
+{% empty %}
+
+<h3>
+
+No jobs found.
+
+</h3>
+
+{% endfor %}
+
+</body>
+
+</html>

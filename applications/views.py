@@ -72,3 +72,27 @@ def apply_job(request, job_id):
             "job": job
         }
     )
+    
+    
+@login_required(login_url="login")
+def my_applications(request):
+
+    profile = request.user.profile
+
+    if profile.role != "JOB_SEEKER":
+        return HttpResponseForbidden("Access Denied")
+
+    applications = Application.objects.filter(
+        applicant=profile.jobseeker
+    ).select_related(
+        "job",
+        "job__company"
+    ).order_by("-applied_at")
+
+    return render(
+        request,
+        "applications/my_applications.html",
+        {
+            "applications": applications
+        }
+    )    

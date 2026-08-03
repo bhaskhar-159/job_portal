@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>My Applications</title>
+
+</head>
+
+<body>
+
+<h1>My Applications</h1>
+
+<hr>
+
+{% for application in applications %}
+
+<h2>
+
+{{ application.job.title }}
+
+</h2>
+
+<p>
+
+Company:
+{{ application.job.company.name }}
+
+</p>
+
+<p>
+
+Applied:
+{{ application.applied_at }}
+
+</p>
+
+<p>
+
+Status:
+{{ application.get_status_display }}
+
+</p>
+
+<hr>
+
+{% empty %}
+
+<h3>
+
+You haven't applied for any jobs yet.
+
+</h3>
+
+{% endfor %}
+
+<br>
+
+<a href="{% url 'jobseeker_dashboard' %}">
+
+Back
+
+</a>
+
+</body>
+
+</html>
