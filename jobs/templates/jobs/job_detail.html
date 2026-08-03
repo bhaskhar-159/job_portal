@@ -61,21 +61,19 @@
 
 <br>
 
-<a href="{% url 'update_job' job.id %}">
-    Edit
-</a>
+<a href="{% url 'update_job' job.id %}">Edit</a>
 
-|
+<br><br>
 
-<a href="{% url 'delete_job' job.id %}">
-    Delete
-</a>
+<a href="{% url 'delete_job' job.id %}">Delete</a>
 
-|
+<br><br>
 
-<a href="{% url 'job_list' job.company.id %}">
-    Back
-</a>
+<a href="{% url 'applicant_list' job.id %}">View Applicants</a>
+
+<br><br>
+
+<a href="{% url 'job_list' job.company.id %}">Back</a>
 
 </body>
 

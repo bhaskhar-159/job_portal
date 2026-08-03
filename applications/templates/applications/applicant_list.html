@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Applicants</title>
+</head>
+
+<body>
+
+<h1>{{ job.title }}</h1>
+
+<h2>Applicants</h2>
+
+<hr>
+
+{% for application in applications %}
+
+<h3>
+
+<a href="{% url 'applicant_detail' application.id %}">
+
+{{ application.applicant.user_profile.user.username }}
+
+</a>
+
+</h3>
+
+<p>
+
+Status :
+{{ application.get_status_display }}
+
+</p>
+
+<p>
+
+Applied :
+
+{{ application.applied_at }}
+
+</p>
+
+<hr>
+
+{% empty %}
+
+<h3>No applicants yet.</h3>
+
+{% endfor %}
+
+</body>
+
+</html>
