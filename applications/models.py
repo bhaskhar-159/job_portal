@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from jobs.models import Job
+from accounts.models import JobSeekerProfile
 
 
 class Application(models.Model):
@@ -19,16 +19,16 @@ class Application(models.Model):
     )
 
     applicant = models.ForeignKey(
-        User,
+        JobSeekerProfile,
         on_delete=models.CASCADE,
         related_name="applications"
     )
 
-    resume = models.FileField(
-        upload_to="resumes/"
-    )
+    cover_letter = models.TextField()
 
-    cover_letter = models.TextField(blank=True)
+    resume = models.FileField(
+        upload_to="applications/resumes/"
+    )
 
     status = models.CharField(
         max_length=20,
@@ -36,10 +36,15 @@ class Application(models.Model):
         default="PENDING"
     )
 
-    applied_at = models.DateTimeField(auto_now_add=True)
+    applied_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     class Meta:
-        unique_together = ("job", "applicant")
+
+        unique_together = [
+            ("job", "applicant")
+        ]
 
     def __str__(self):
-        return f"{self.applicant.username} - {self.job.title}"
+        return f"{self.applicant.user_profile.user.username} - {self.job.title}"

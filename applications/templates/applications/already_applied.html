@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Already Applied</title>
+
+</head>
+
+<body>
+
+<h2>
+
+You have already applied for
+
+{{ job.title }}
+
+</h2>
+
+<br>
+
+<a href="{% url 'job_detail' job.id %}">
+
+Back
+
+</a>
+
+</body>
+
+</html>
