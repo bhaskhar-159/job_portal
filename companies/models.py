@@ -1,20 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import RecruiterProfile
 
 
 class Company(models.Model):
 
-    owner = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="companies"
-    )
+    recruiter = models.ForeignKey(
+    RecruiterProfile,
+    on_delete=models.CASCADE,
+    related_name="companies",
+    null=True,
+    blank=True
+)
 
-    company_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
 
     description = models.TextField()
 
     website = models.URLField(blank=True)
+
+    email = models.EmailField(blank=True)
+
+    phone = models.CharField(max_length=15, blank=True)
 
     location = models.CharField(max_length=200)
 
@@ -26,5 +32,7 @@ class Company(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return self.company_name
+        return self.name

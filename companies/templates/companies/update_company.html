@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Company</title>
+</head>
+
+<body>
+
+<h1>Edit Company</h1>
+
+<form method="POST"
+      enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        Update Company
+
+    </button>
+
+</form>
+
+</body>
+
+</html>

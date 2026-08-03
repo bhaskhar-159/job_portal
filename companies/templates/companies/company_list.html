@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Companies</title>
+</head>
+
+<body>
+
+<h1>My Companies</h1>
+
+<a href="{% url 'create_company' %}">
+    Add New Company
+</a>
+
+<hr>
+
+{% if companies %}
+
+<table border="1" cellpadding="10">
+
+<tr>
+
+    <th>Name</th>
+    <th>Location</th>
+    <th>Email</th>
+
+</tr>
+
+{% for company in companies %}
+
+<tr>
+
+    <td>
+    <a href="{% url 'company_detail' company.id %}">
+        {{ company.name }}
+    </a>
+    </td>
+    <td>{{ company.location }}</td>
+
+    <td>{{ company.email }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% else %}
+
+<h3>No Companies Added Yet</h3>
+
+{% endif %}
+
+</body>
+</html>
