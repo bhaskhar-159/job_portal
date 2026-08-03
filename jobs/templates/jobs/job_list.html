@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ company.name }} Jobs</title>
+</head>
+
+<body>
+
+<h1>{{ company.name }}</h1>
+
+<h2>Jobs</h2>
+
+<a href="{% url 'create_job' company.id %}">
+    + Post New Job
+</a>
+
+<hr>
+
+{% if jobs %}
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Title</th>
+    <th>Location</th>
+    <th>Job Type</th>
+    <th>Deadline</th>
+</tr>
+
+{% for job in jobs %}
+
+<tr>
+
+    <td>
+
+        <a href="{% url 'job_detail' job.id %}">
+            {{ job.title }}
+        </a>
+
+    </td>
+
+    <td>{{ job.location }}</td>
+
+    <td>{{ job.get_job_type_display }}</td>
+
+    <td>{{ job.deadline }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% else %}
+
+<h3>No jobs posted yet.</h3>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'company_detail' company.id %}">
+    Back to Company
+</a>
+
+</body>
+</html>

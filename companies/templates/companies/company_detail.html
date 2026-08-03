@@ -39,21 +39,23 @@
 
 <br><br>
 
-<a href="{% url 'company_update' company.id %}">
-    Edit
-</a>
+<a href="{% url 'company_update' company.id %}">Edit</a>
 
-|
+<br><br>
 
-<a href="{% url 'company_delete' company.id %}">
-    Delete
-</a>
+<a href="{% url 'company_delete' company.id %}">Delete</a>
 
-|
+<br><br>
 
-<a href="{% url 'company_list' %}">
-    Back
-</a>
+<a href="{% url 'create_job' company.id %}">
+
+<br><br>
+
+<a href="{% url 'job_list' company.id %}">View Jobs</a>
+
+<br><br>
+
+<a href="{% url 'company_list' %}">Back</a>
 
 </body>
 </html>
