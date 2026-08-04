@@ -1,5 +1,5 @@
 # Job_Portal (Django)
-# Welcome!
+#### Welcome!
 A full-featured Job Portal Web Application built with Django. This project supports two types of users: Recruiters and Job Seekers. Recruiters can create companies, post jobs, and manage applications, while job seekers can browse jobs, apply online, and track their application status.
 
 ## Features of Project
@@ -61,7 +61,7 @@ A full-featured Job Portal Web Application built with Django. This project suppo
 * Bootstrap 5 (planned)
 * Git & GitHub  
 
-### Installation
+# Installation
 ### Clone the repository
 git clone (https://github.com/bhaskhar-159/job_portal.git)
 
