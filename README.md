@@ -62,7 +62,8 @@ A full-featured Job Portal Web Application built with Django. This project suppo
 
 ### Installation
 ### Clone the repository
-git clone [https://github.com/<your-username>/<repository-name>.git](https://github.com/bhaskhar-159/job_portal.git)
+git clone (https://github.com/bhaskhar-159/job_portal.git)
+
 cd <repository-name>
 
 ### Create a virtual environment
@@ -70,11 +71,11 @@ python -m venv env
 
 ### Activate the virtual environment
 
-### Windows
+### * Windows
 
 env\Scripts\activate
 
-### macOS / Linux
+### * macOS / Linux
 
 source env/bin/activate
 
