@@ -8,6 +8,8 @@ A full-featured Job Portal Web Application built with Django. This project suppo
 * User Registration
 * User Login & Logout
 * Role-Based Authentication (Recruiter & Job Seeker)
+* Recruiter Dashboard
+* Job Seeker Dashboard
 
 ### 2. User Profiles
 
@@ -45,5 +47,14 @@ A full-featured Job Portal Web Application built with Django. This project suppo
 * Browse Jobs
 * View Job Details
 * Manage Profile
+
+Technologies Used
+Python 3
+Django
+PostgreSQL
+HTML5
+CSS3
+Bootstrap 5 (planned)
+Git & GitHub  
 * View Applied Jobs
 * Track Application Progress
