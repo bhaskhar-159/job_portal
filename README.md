@@ -59,3 +59,32 @@ A full-featured Job Portal Web Application built with Django. This project suppo
 * CSS3
 * Bootstrap 5 (planned)
 * Git & GitHub  
+
+Installation
+Clone the repository
+git clone https://github.com/<your-username>/<repository-name>.git
+cd <repository-name>
+Create a virtual environment
+python -m venv env
+Activate the virtual environment
+
+Windows
+
+env\Scripts\activate
+
+macOS / Linux
+
+source env/bin/activate
+Install dependencies
+Install dependencies
+pip install -r requirements.txt
+Apply migrations
+python manage.py migrate
+Create a superuser
+python manage.py createsuperuser
+Run the development server
+python manage.py runserver
+
+Visit:
+
+http://127.0.0.1:8000/
