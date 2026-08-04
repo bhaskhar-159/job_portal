@@ -48,8 +48,9 @@ A full-featured Job Portal Web Application built with Django. This project suppo
 * View Job Details
 * Manage Profile
 
-Technologies Used
-Python 3
+### Technologies Used
+
+Python 
 Django
 PostgreSQL
 HTML5
