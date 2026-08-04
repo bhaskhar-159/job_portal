@@ -47,15 +47,15 @@ A full-featured Job Portal Web Application built with Django. This project suppo
 * Browse Jobs
 * View Job Details
 * Manage Profile
+* View Applied Jobs
+* Track Application Progress
 
 ### Technologies Used
 
-Python 
-Django
-PostgreSQL
-HTML5
-CSS3
-Bootstrap 5 (planned)
-Git & GitHub  
-* View Applied Jobs
-* Track Application Progress
+* Python 
+* Django
+* PostgreSQL
+* HTML5
+* CSS3
+* Bootstrap 5 (planned)
+* Git & GitHub  
